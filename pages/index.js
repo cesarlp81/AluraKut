@@ -1,5 +1,6 @@
 import React from 'react';
-
+import nookies from 'nookies';
+import jwt from 'jsonwebtoken';
 import MainGrid from '../src/components/MainGrid'
 import Box from '../src/components/Box'
 import { AlurakutMenu, AlurakutProfileSidebarMenuDefault, OrkutNostalgicIconSet } from '../src/lib/AlurakutCommons';
@@ -45,23 +46,23 @@ function ProfileRelationsBox(propriedades) {
   )
 }
 
+
+
 export default function Home(props) {
   const usuarioAleatorio = props.githubUser;
   const [comunidades, setComunidades] = React.useState([]);
-  // const comunidades = comunidades[0];
-  // const alteradorDeComunidades/setComunidades = comunidades[1];
-  // const comunidades = ['Alurakut'];
+  //const comunidades = comunidades[0];
+    //const alteradorDeComunidades/setComunidades = comunidades[1];
+  //const comunidades = ['Alurakut'];
   const pessoasFavoritas = [
     'juunegreiros',
     'omariosouto',
     'peas',
+    'rafaballerini',
     'cesarlp81',
     'simoneMpedroso',
-    'rafaballerini',
     'marcobrunodev',
-    'felipefialho'
-    
-    
+    'felipefialho',
   ]
   const [seguidores, setSeguidores] = React.useState([]);
   // 0 - Pegar o array de dados do github 
@@ -221,6 +222,3 @@ export default function Home(props) {
     </>
   )
 }
-
-
-

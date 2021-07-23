@@ -12,11 +12,15 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     font-family: sans-serif;
-    background-color: #D9E6F6;
+    background-image: url(https://exame.com/wp-content/uploads/2021/03/foto-corinthians-arena-vazia.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+
   }
 
   #__next {
-    display: flex;
+    display: block;
     min-height: 100vh;
     flex-direction: columns;
   }
