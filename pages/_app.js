@@ -20,15 +20,15 @@ const GlobalStyle = createGlobalStyle`
   }
 
   #__next {
-    display: block;
+    display: flex;
     min-height: 100vh;
-    flex-direction: columns;
+    flex-direction: column;
   }
 
   img {
     max-width: 100%;
     height: auto;
-    display: block;
+    display: flex;
   }
 
   ${AluraKutStyles}

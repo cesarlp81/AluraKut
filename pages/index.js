@@ -61,8 +61,7 @@ export default function Home(props) {
     'rafaballerini',
     'cesarlp81',
     'simoneMpedroso',
-    'marcobrunodev',
-    'felipefialho',
+    
   ]
   const [seguidores, setSeguidores] = React.useState([]);
   // 0 - Pegar o array de dados do github 
@@ -122,7 +121,7 @@ export default function Home(props) {
         <div className="welcomeArea" style={{ gridArea: 'welcomeArea' }}>
           <Box>
             <h1 className="title">
-              Bem vindo(a) 
+              Bem vindo(a) ao alurakut
             </h1>
 
             <OrkutNostalgicIconSet />
@@ -187,7 +186,7 @@ export default function Home(props) {
               Comunidades ({comunidades.length})
             </h2>
             <ul>
-              {comunidades.slice(0,6).map((itemAtual) => {
+            {comunidades.slice(0,6).map((itemAtual) => {
                 return (
                   <li key={itemAtual.id}>
                     <a href={`/communities/${itemAtual.id}`}>
@@ -205,7 +204,7 @@ export default function Home(props) {
             </h2>
 
             <ul>
-              {pessoasFavoritas.slice(0,6).map((itemAtual) => {
+              {pessoasFavoritas.map((itemAtual) => {
                 return (
                   <li key={itemAtual}>
                     <a href={`/users/${itemAtual}`}>
@@ -221,4 +220,32 @@ export default function Home(props) {
       </MainGrid>
     </>
   )
+}
+
+
+export async function getServerSideProps(context) {
+  const cookies = nookies.get(context)
+  const token = cookies.USER_TOKEN;
+  const { isAuthenticated } = await fetch('https://alurakut.vercel.app/api/auth', {
+    headers: {
+        Authorization: token
+      }
+  })
+  .then((resposta) => resposta.json())
+
+  if(!isAuthenticated) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      }
+    }
+  }
+
+  const { githubUser } = jwt.decode(token);
+  return {
+    props: {
+      githubUser
+    }, // will be passed to the page component as props
+  }
 }

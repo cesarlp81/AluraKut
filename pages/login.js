@@ -1,28 +1,17 @@
 import React from 'react';
+// Hook do NextJS
 import { useRouter } from 'next/router';
 import nookies from 'nookies';
 
-function mensageErros(){
-  return (
-    <div class="alert alert-danger" role="alert">
-      Usuário invalido ou inexistente, digite um <strong>login Github</strong> no formulário!
-    </div>
-  )
-}
-
-export default function LoginScreen(props) {
+export default function LoginScreen() {
   const router = useRouter();
-  const [githubUser, setGithubUser] = React.useState('cesarlp81');
-  React.useEffect(() => {
-    document.title = " - AluraKut - "
- }, []);
+  const [githubUser, setGithubUser] = React.useState('omariosouto');
 
   return (
     <main style={{ display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <div className="loginScreen">
         <section className="logoArea">
-          {props.m ? mensageErros() : ''}
-          <h1 className="title" style={{ fontSize:"50px", paddingBottom:"20px" }}>GitKut</h1>
+          <img src="https://alurakut.vercel.app/logo.svg" />
 
           <p><strong>Conecte-se</strong> aos seus amigos e familiares usando recados e mensagens instantâneas</p>
           <p><strong>Conheça</strong> novas pessoas através de amigos de seus amigos e comunidades</p>
@@ -32,6 +21,8 @@ export default function LoginScreen(props) {
         <section className="formArea">
           <form className="box" onSubmit={(infosDoEvento) => {
                 infosDoEvento.preventDefault();
+                // alert('Alguém clicou no botão!')
+                console.log('Usuário: ', githubUser)
                 fetch('https://alurakut.vercel.app/api/login', {
                     method: 'POST',
                     headers: {
@@ -46,11 +37,11 @@ export default function LoginScreen(props) {
                         path: '/',
                         maxAge: 86400 * 7 
                     })
-                    router.push(`/user/${githubUser}`)
+                    router.push('/')
                 })
           }}>
             <p>
-              Acesse o <strong>GitKut</strong> com sua conta
+              Acesse agora mesmo com seu usuário do <strong>GitHub</strong>!
           </p>
             <input
                 placeholder="Usuário"
@@ -88,14 +79,4 @@ export default function LoginScreen(props) {
       </div>
     </main>
   )
-}
-
-export async function getServerSideProps(context) {
-
-  const m = context.query.m ? context.query.m : false
-  return {
-    props: {
-      m
-    },
-  }
 }
