@@ -226,7 +226,7 @@ export default function Home(props) {
 export async function getServerSideProps(context) {
   const cookies = nookies.get(context)
   const token = cookies.USER_TOKEN;
-  const { isAuthenticated } = await fetch('https://alurakut.vercel.app/api/auth', {
+  const { isAuthenticated } = await fetch('alurakut-5kf54shg8-cesarlp81.vercel.app', {
     headers: {
         Authorization: token
       }
